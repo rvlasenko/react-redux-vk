@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
-import { initialState, rootReducer } from '../reducers/index';
+import { rootReducer } from '../reducers/index';
 
-export const store = createStore(rootReducer, initialState);
+// без начального состояния так как используется составной редуктор
+export const store = createStore(rootReducer);
