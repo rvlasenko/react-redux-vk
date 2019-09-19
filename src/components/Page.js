@@ -5,20 +5,31 @@ export class Page extends React.Component {
     onBtnClick = e => {
         const year = +e.currentTarget.innerText;
         this.props.setYear(year);
+        this.props.getPhotos(year);
     };
 
     render() {
-        const { year, photos } = this.props;
+        const { year, photos, isLoading } = this.props;
         return (
-            <div>
+            <div className="ib page">
                 <div>
-                    <button onClick={this.onBtnClick}>2019</button>
-                    <button onClick={this.onBtnClick}>2018</button>
-                    <button onClick={this.onBtnClick}>2017</button>
+                    <button className="btn" onClick={this.onBtnClick}>
+                        2019
+                    </button>{' '}
+                    <button className="btn" onClick={this.onBtnClick}>
+                        2018
+                    </button>{' '}
+                    <button className="btn" onClick={this.onBtnClick}>
+                        2017
+                    </button>
                 </div>
-                <p>
-                    У тебя {photos.length} фото за {year} год.
-                </p>
+                <h3>{year} год</h3>
+
+                {isLoading ? (
+                    <p>Загрузка</p>
+                ) : (
+                    <p>У тебя {photos.length} фото.</p>
+                )}
             </div>
         );
     }
@@ -27,5 +38,7 @@ export class Page extends React.Component {
 Page.propTypes = {
     year: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     setYear: PropTypes.func.isRequired,
+    getPhotos: PropTypes.func.isRequired,
 };
