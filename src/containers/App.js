@@ -3,11 +3,20 @@ import { connect } from 'react-redux';
 import { User } from '../components/User';
 import { Page } from '../components/Page';
 import { getPhotos, setYear } from '../actions/PageActions';
+import { handleLogin, handleSuccess, handleError } from '../actions/UserActions';
 import './App.css';
 
 class App extends Component {
     render() {
-        const { user, page, setYearAction, getPhotosAction } = this.props;
+        const {
+            user,
+            page,
+            setYearAction,
+            getPhotosAction,
+            handleLoginAction,
+            handleSuccessAction,
+            handleErrorAction,
+        } = this.props;
 
         return (
             <div className="App">
@@ -18,7 +27,15 @@ class App extends Component {
                     setYear={setYearAction}
                     getPhotos={getPhotosAction}
                 />
-                <User name={user.name} age={user.age} />
+                <User
+                    name={user.name}
+                    images={user.images}
+                    errorMessage={user.error}
+                    isLoading={user.isLoading}
+                    handleLogin={handleLoginAction}
+                    handleSuccess={handleSuccessAction}
+                    handleError={handleErrorAction}
+                />
             </div>
         );
     }
@@ -37,6 +54,9 @@ const mapDispatchToProps = dispatch => {
     return {
         setYearAction: year => dispatch(setYear(year)),
         getPhotosAction: year => dispatch(getPhotos(year)),
+        handleLoginAction: () => dispatch(handleLogin()),
+        handleSuccessAction: token => dispatch(handleSuccess(token)),
+        handleErrorAction: error => dispatch(handleError(error)),
     };
 };
 

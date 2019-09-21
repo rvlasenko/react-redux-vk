@@ -25,11 +25,7 @@ export class Page extends React.Component {
                 </div>
                 <h3>{year} год</h3>
 
-                {isLoading ? (
-                    <p>Загрузка</p>
-                ) : (
-                    <p>У тебя {photos.length} фото.</p>
-                )}
+                {isLoading ? <p>Загрузка</p> : <p>У тебя {photos.length} фото.</p>}
             </div>
         );
     }
