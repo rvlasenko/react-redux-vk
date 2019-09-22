@@ -9,15 +9,28 @@ export class Page extends React.Component {
     };
 
     renderButtons = () => {
+        const { userName } = this.props;
         return (
             <div>
-                <button className="btn" onClick={this.onBtnClick}>
+                <button
+                    className="btn"
+                    onClick={this.onBtnClick}
+                    disabled={!userName.length}
+                >
                     2019
                 </button>{' '}
-                <button className="btn" onClick={this.onBtnClick}>
+                <button
+                    className="btn"
+                    onClick={this.onBtnClick}
+                    disabled={!userName.length}
+                >
                     2018
                 </button>{' '}
-                <button className="btn" onClick={this.onBtnClick}>
+                <button
+                    className="btn"
+                    onClick={this.onBtnClick}
+                    disabled={!userName.length}
+                >
                     2017
                 </button>
             </div>
@@ -44,18 +57,19 @@ export class Page extends React.Component {
     };
 
     render() {
-        const { year, photos, isLoading } = this.props;
+        const { year, photos, isLoading, userName } = this.props;
+        let paragraph = '';
+
+        if (userName.length) {
+            paragraph = <p className="paragraph">У тебя {photos.length} фото.</p>;
+        }
 
         return (
             <div className="ib page">
-                <h3>{year} год</h3>
+                <h3>{year ? `${year} год` : 'Год не выбран'}</h3>
                 {this.renderButtons()}
 
-                {isLoading ? (
-                    <p className="paragraph">Загрузка</p>
-                ) : (
-                    <p className="paragraph">У тебя {photos.length} фото.</p>
-                )}
+                {isLoading ? <p className="paragraph">Загрузка</p> : paragraph}
 
                 <div>{photos.length ? this.renderPhotos() : ''}</div>
             </div>
@@ -64,6 +78,7 @@ export class Page extends React.Component {
 }
 
 Page.propTypes = {
+    userName: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
     isLoading: PropTypes.bool.isRequired,

@@ -1,11 +1,7 @@
-import {
-    SET_YEAR,
-    REQUEST_START,
-    REQUEST_SUCCESS,
-} from '../actions/PageActions';
+import { SET_YEAR, REQUEST_START, REQUEST_SUCCESS } from '../actions/PageActions';
 
 const initialState = {
-    year: 2019,
+    year: 0,
     photos: [],
     isLoading: false,
 };

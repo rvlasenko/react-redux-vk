@@ -92,6 +92,11 @@ img {
 .btn:hover {
   background-color: #6d8cb0
 }
+.btn:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: .8;
+}
 .paragraph {
     margin: 10px 0 10px 0;
 }
