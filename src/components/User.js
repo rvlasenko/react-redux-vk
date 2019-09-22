@@ -15,13 +15,13 @@ export class User extends React.Component {
         }
     }
     renderTemplate = () => {
-        const { images, name, isLoading, handleLogin, errorMessage } = this.props;
+        const { name, isLoading, handleLogin, errorMessage } = this.props;
 
         if (isLoading) {
             return <p>Загружаю...</p>;
         }
 
-        if (Object.keys(images).length) {
+        if (name) {
             return <p>Привет, {name}</p>;
         } else {
             return (
@@ -44,7 +44,6 @@ export class User extends React.Component {
 
 User.propTypes = {
     name: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
     errorMessage: PropTypes.string.isRequired,
     handleLogin: PropTypes.func.isRequired,
     handleSuccess: PropTypes.func.isRequired,

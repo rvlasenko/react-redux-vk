@@ -8,24 +8,56 @@ export class Page extends React.Component {
         this.props.getPhotos(year);
     };
 
+    renderButtons = () => {
+        return (
+            <div>
+                <button className="btn" onClick={this.onBtnClick}>
+                    2019
+                </button>{' '}
+                <button className="btn" onClick={this.onBtnClick}>
+                    2018
+                </button>{' '}
+                <button className="btn" onClick={this.onBtnClick}>
+                    2017
+                </button>
+            </div>
+        );
+    };
+
+    renderPhotos = () => {
+        const { photos } = this.props;
+
+        return photos.map(photo => (
+            <a
+                href={photo.link}
+                key={photo.id}
+                target="_blank"
+                without
+                rel="noopener noreferrer"
+            >
+                <div className="img-wrap">
+                    <img src={photo.images.thumbnail.url} alt="" />
+                    <span>{photo.likes.count} ❤</span>
+                </div>
+            </a>
+        ));
+    };
+
     render() {
         const { year, photos, isLoading } = this.props;
+
         return (
             <div className="ib page">
-                <div>
-                    <button className="btn" onClick={this.onBtnClick}>
-                        2019
-                    </button>{' '}
-                    <button className="btn" onClick={this.onBtnClick}>
-                        2018
-                    </button>{' '}
-                    <button className="btn" onClick={this.onBtnClick}>
-                        2017
-                    </button>
-                </div>
                 <h3>{year} год</h3>
+                {this.renderButtons()}
 
-                {isLoading ? <p>Загрузка</p> : <p>У тебя {photos.length} фото.</p>}
+                {isLoading ? (
+                    <p className="paragraph">Загрузка</p>
+                ) : (
+                    <p className="paragraph">У тебя {photos.length} фото.</p>
+                )}
+
+                <div>{photos.length ? this.renderPhotos() : ''}</div>
             </div>
         );
     }

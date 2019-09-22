@@ -1,14 +1,7 @@
-import {
-    LOGIN_SUCCESS,
-    LOGIN_START,
-    LOGIN_FAILED,
-    GET_USER_IMAGES,
-    GET_USER_NAME,
-} from '../actions/UserActions';
+import { LOGIN_SUCCESS, LOGIN_START, LOGIN_FAILED } from '../actions/UserActions';
 
 const initialState = {
     isLoading: false,
-    images: [],
     error: '',
     name: '',
 };
@@ -33,11 +26,6 @@ export function userReducer(state = initialState, action) {
                 ...state,
                 isLoading: false,
                 error: action.payload,
-            };
-        case GET_USER_IMAGES:
-            return {
-                ...state,
-                images: action.payload,
             };
         default:
             return state;

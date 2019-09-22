@@ -1,8 +1,6 @@
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
-export const GET_USER_IMAGES = 'GET_USER_IMAGES';
-export const GET_USER_NAME = 'GET_USER_NAME';
 
 export function handleSuccess(token) {
     return dispatch => {
@@ -11,27 +9,16 @@ export function handleSuccess(token) {
             type: LOGIN_START,
         });
 
-        fetch(
-            'https://api.instagram.com/v1/users/self/media/recent?access_token=' + token
-        ).then(response => {
-            response.json().then(images => {
-                dispatch({
-                    type: GET_USER_IMAGES,
-                    payload: images.data,
-                });
-            });
-
-            fetch('https://api.instagram.com/v1/users/self?access_token=' + token).then(
-                response => {
-                    response.json().then(user => {
-                        dispatch({
-                            type: LOGIN_SUCCESS,
-                            payload: user.data.username,
-                        });
+        fetch('https://api.instagram.com/v1/users/self?access_token=' + token).then(
+            response => {
+                response.json().then(user => {
+                    dispatch({
+                        type: LOGIN_SUCCESS,
+                        payload: user.data.username,
                     });
-                }
-            );
-        });
+                });
+            }
+        );
     };
 }
 

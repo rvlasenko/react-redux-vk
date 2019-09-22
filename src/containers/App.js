@@ -29,7 +29,6 @@ class App extends Component {
                 />
                 <User
                     name={user.name}
-                    images={user.images}
                     errorMessage={user.error}
                     isLoading={user.isLoading}
                     handleLogin={handleLoginAction}
